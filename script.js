@@ -241,15 +241,19 @@ function formatTime(seconds) {
 function populateLibrary() {
     const container = document.getElementById('library-content');
     container.innerHTML = '';
-    
+
     libraryData.forEach(item => {
         const html = `
-            <div class="lib-item" onclick="openPlayer('${item.audio}')">
+            <div class="lib-item" onclick="openPlayer('${item.audio}', '${item.id}')">
                 <img src="${item.img}" class="lib-cover" alt="Cover">
                 <div class="lib-info">
                     <h4 class="gold-text">${item.title}</h4>
-                    <p style="font-size:0.8rem; color:var(--text-secondary)">Jaggu Kashyap • ${item.category}</p>
-                    <p style="font-size:0.8rem; margin-top:5px"><i class="far fa-clock"></i> ${item.time}</p>
+                    <p style="font-size:0.8rem; color:var(--text-secondary)">
+                        Jaggu Kashyap • ${item.category}
+                    </p>
+                    <p style="font-size:0.8rem; margin-top:5px">
+                        <i class="far fa-clock"></i> ${item.time}
+                    </p>
                 </div>
             </div>
         `;
