@@ -26,16 +26,18 @@ let playbackSpeed = 1;
 let sleepTimerId = null;
 
 // Mock Data for Library
-const libraryData = [
-    { title: "Maa Ke Haath Ki Roti", category: "Maa Stories", time: "14:20", img: "https://images.unsplash.com/photo-1544006659-f0b21884ce1d?auto=format&fit=crop&q=80&w=150" },
-    { title: "Toota Dil, Nayi Shuruaat", category: "Heartbreak", time: "22:15", img: "https://images.unsplash.com/photo-1516585427167-9f4af9627e6c?auto=format&fit=crop&q=80&w=150" },
-    { title: "Sheher Ka Sangharsh", category: "Struggle", time: "18:45", img: "https://images.unsplash.com/photo-1506869640319-ce1c192f1556?auto=format&fit=crop&q=80&w=150" }
-];
+let libraryData = [];
+
+async function loadStories() {
+    const res = await fetch("stories.json");
+    libraryData = await res.json();
+    loadStories();
+}
 
 /* ================= INITIALIZATION ================= */
 document.addEventListener("DOMContentLoaded", () => {
     checkLoginStatus();
-    populateLibrary();
+    loadStories();
     setupAudioListeners();
 });
 
@@ -101,15 +103,17 @@ function switchView(viewName) {
     }
 }
 
-function openPlayer(storyId = "default-story") {
+function openPlayer(audioUrl, storyId = "default-story") {
     switchView('player');
 
-    currentAudio.src = "https://res.cloudinary.com/dwn2rdoer/video/upload/f_mp3,q_auto:low,br_64k/v1775476494/Depression_svgk3y.mp3";
+    currentAudio.src = audioUrl;
 
     const savedTime = localStorage.getItem(storyId + "-time");
     if (savedTime) {
         currentAudio.currentTime = parseFloat(savedTime);
     }
+
+    currentAudio.play();
 }
 
 /* ================= AUDIO PLAYER LOGIC ================= */
@@ -241,7 +245,7 @@ function populateLibrary() {
     
     libraryData.forEach(item => {
         const html = `
-            <div class="lib-item" onclick="openPlayer()">
+            <div class="lib-item" onclick="openPlayer('${item.audio}')">
                 <img src="${item.img}" class="lib-cover" alt="Cover">
                 <div class="lib-info">
                     <h4 class="gold-text">${item.title}</h4>
