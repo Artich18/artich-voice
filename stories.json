@@ -1,0 +1,18 @@
+[
+  {
+    "id": "depression-story",
+    "title": "Depression",
+    "category": "Life Lessons",
+    "time": "5:09",
+    "img": "https://images.unsplash.com/photo-1506784365847-bbad939e9335",
+    "audio": "https://res.cloudinary.com/dwn2rdoer/video/upload/f_mp3,q_auto:low,br_64k/v1775476494/Depression_svgk3y.mp3"
+  },
+  {
+    "id": "maa-story",
+    "title": "Maa Ke Haath Ki Roti",
+    "category": "Maa Stories",
+    "time": "8:20",
+    "img": "https://images.unsplash.com/photo-1544006659-f0b21884ce1d",
+    "audio": "https://res.cloudinary.com/dwn2rdoer/video/upload/f_mp3,q_auto:low,br_64k/v1775476494/MaaStory.mp3"
+  }
+]
