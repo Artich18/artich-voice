@@ -172,6 +172,26 @@ function addFavorite(storyTitle = "The Scars We Hide") {
         alert("Added to favorites");
     }
 }
+const chapters = [
+  "https://res.cloudinary.com/dwn2rdoer/video/upload/f_mp3,q_auto:low,br_64k/v1775476494/Depression_svgk3y.mp3",
+  "https://res.cloudinary.com/dwn2rdoer/video/upload/f_mp3,q_auto:low,br_64k/v1775476494/Depression_svgk3y.mp3"
+];
+
+let currentChapter = 0;
+
+function nextChapter() {
+    currentChapter++;
+    if (currentChapter >= chapters.length) currentChapter = 0;
+    currentAudio.src = chapters[currentChapter];
+    currentAudio.play();
+}
+
+function prevChapter() {
+    currentChapter--;
+    if (currentChapter < 0) currentChapter = chapters.length - 1;
+    currentAudio.src = chapters[currentChapter];
+    currentAudio.play();
+}
 
 /* ================= PLAYER EVENT LISTENERS ================= */
 function setupAudioListeners() {
