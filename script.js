@@ -163,6 +163,14 @@ function setSleepTimer() {
         alert(`Sleep timer set for ${time} minutes.`);
     }
 }
+function addFavorite(storyTitle = "The Scars We Hide") {
+    let favs = JSON.parse(localStorage.getItem("favorites")) || [];
+    if (!favs.includes(storyTitle)) {
+        favs.push(storyTitle);
+        localStorage.setItem("favorites", JSON.stringify(favs));
+        alert("Added to favorites");
+    }
+}
 
 /* ================= PLAYER EVENT LISTENERS ================= */
 function setupAudioListeners() {
