@@ -101,10 +101,15 @@ function switchView(viewName) {
     }
 }
 
-function openPlayer() {
+function openPlayer(storyId = "default-story") {
     switchView('player');
-    // Mock load an audio track
-    // currentAudio.src = cloudinaryConfig.audioBase + "sample_story.mp3";
+
+    currentAudio.src = "audio/sample.mp3";
+
+    const savedTime = localStorage.getItem(storyId + "-time");
+    if (savedTime) {
+        currentAudio.currentTime = parseFloat(savedTime);
+    }
 }
 
 /* ================= AUDIO PLAYER LOGIC ================= */
