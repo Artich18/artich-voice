@@ -104,7 +104,7 @@ function switchView(viewName) {
 function openPlayer(storyId = "default-story") {
     switchView('player');
 
-    currentAudio.src = "audio/sample.mp3";
+    currentAudio.src = "https://res.cloudinary.com/dwn2rdoer/video/upload/f_mp3,q_auto:low,br_64k/v1775476494/Depression_svgk3y.mp3";
 
     const savedTime = localStorage.getItem(storyId + "-time");
     if (savedTime) {
