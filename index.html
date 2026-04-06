@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Artich Voice | Emotional Storytelling</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <div id="login-modal" class="modal glass-panel">
+        <div class="modal-content">
+            <span class="close-btn" onclick="skipLogin()">&times;</span>
+            <h2 class="gold-text">Welcome to Artich Voice</h2>
+            <p>Real talk, real emotions. Enter your details to save your progress.</p>
+            
+            <div class="input-group">
+                <input type="text" id="user-name" placeholder="Your Name">
+            </div>
+            <div class="input-group phone-input">
+                <select id="country-code">
+                    <option value="+91" selected>+91 (IND)</option>
+                    <option value="+1">+1 (USA)</option>
+                </select>
+                <input type="tel" id="mobile-number" placeholder="Mobile Number">
+            </div>
+            
+            <button class="btn-primary" onclick="handleLogin()">Continue</button>
+            <button class="btn-secondary" onclick="skipLogin()">Skip as Guest</button>
+        </div>
+    </div>
+
+    <main id="app-container">
+        
+        <section id="view-home" class="view active">
+            <div class="hero-section">
+                <div class="hero-overlay"></div>
+                <div class="hero-content">
+                    <h5>Latest Release</h5>
+                    <h1 class="cinematic-title">The Scars We Hide</h1>
+                    <p>Narrated by Jaggu Kashyap</p>
+                    <button class="btn-primary" onclick="openPlayer()"><i class="fas fa-play"></i> Play Now</button>
+                </div>
+            </div>
+
+            <div class="content-padding">
+                <h3 class="section-title">Continue Listening</h3>
+                <div class="continue-card glass-panel" onclick="openPlayer()">
+                    <div class="cc-info">
+                        <h4>Maa Ke Haath Ki Roti</h4>
+                        <p>15 mins left • Chapter 2</p>
+                        <div class="progress-bar"><div class="progress-fill" style="width: 60%;"></div></div>
+                    </div>
+                    <i class="fas fa-play-circle gold-text fa-2x"></i>
+                </div>
+
+                <h3 class="section-title">Emotional Journeys</h3>
+                <div class="categories-grid">
+                    <div class="cat-card heart">Heartbreak</div>
+                    <div class="cat-card maa">Maa Stories</div>
+                    <div class="cat-card struggle">Struggle</div>
+                    <div class="cat-card lessons">Life Lessons</div>
+                    <div class="cat-card village">Village Memories</div>
+                    <div class="cat-card sleep">Sleep Stories</div>
+                </div>
+
+                <div class="quote-section glass-panel">
+                    <i class="fas fa-quote-left gold-text"></i>
+                    <p>"We don't learn from success, my friend. We learn from the tears we hide."</p>
+                    <span>- Jaggu Kashyap</span>
+                </div>
+            </div>
+        </section>
+
+        <section id="view-library" class="view">
+            <div class="header-top">
+                <h2>Library</h2>
+                <i class="fas fa-search"></i>
+            </div>
+            <div class="filters scroll-x">
+                <span class="filter-chip active">All</span>
+                <span class="filter-chip">Free</span>
+                <span class="filter-chip">Premium</span>
+                <span class="filter-chip">Short (<10m)</span>
+            </div>
+            <div class="content-padding library-grid" id="library-content">
+                </div>
+        </section>
+
+        <section id="view-player" class="view">
+            
+            <div class="player-header">
+                <i class="fas fa-chevron-down" onclick="switchView('home')"></i>
+                <span>Now Playing</span>
+                <i class="fas fa-ellipsis-v"></i>
+            </div>
+            
+            <div class="cinematic-cover">
+                <div class="cover-glow"></div>
+            </div>
+
+            <div class="story-info text-center">
+                <h2 class="gold-text">The Scars We Hide</h2>
+                <p>Jaggu Kashyap</p>
+            </div>
+
+            <div class="player-controls">
+                <div class="time-tracker">
+                    <span id="current-time">00:00</span>
+                    <input type="range" id="seek-bar" value="0" max="100">
+                    <span id="total-time">24:15</span>
+                </div>
+                
+                <div class="main-buttons">
+                    <i class="fas fa-backward-15 action-btn" onclick="skip(-15)"></i>
+                    <i class="fas fa-step-backward action-btn"></i>
+                    <div class="play-btn-wrapper" onclick="togglePlay()">
+                        <i class="fas fa-play" id="play-icon"></i>
+                    </div>
+                    <i class="fas fa-step-forward action-btn"></i>
+                    <i class="fas fa-forward-15 action-btn" onclick="skip(15)"></i>
+                </div>
+
+                <div class="secondary-controls">
+                    <div class="speed-control" onclick="toggleSpeed()"><span id="speed-label">1x</span></div>
+                    <i class="fas fa-moon action-btn" onclick="setSleepTimer()" title="Sleep Timer"></i>
+                    <i class="fas fa-heart action-btn"></i>
+                    <i class="fas fa-share-alt action-btn"></i>
+                </div>
+            </div>
+        </section>
+
+        <section id="view-profile" class="view">
+            <div class="profile-header text-center">
+                <div class="profile-avatar"><i class="fas fa-user"></i></div>
+                <h2 id="display-name">Guest User</h2>
+                <span class="badge gold-bg">Free Tier</span>
+            </div>
+            <div class="content-padding">
+                <ul class="profile-menu">
+                    <li><i class="fas fa-history"></i> Listening History</li>
+                    <li><i class="fas fa-bookmark"></i> Saved Stories</li>
+                    <li><i class="fas fa-crown"></i> Go Premium</li>
+                    <li><i class="fas fa-cog"></i> Settings</li>
+                    <li onclick="logout()"><i class="fas fa-sign-out-alt"></i> Logout</li>
+                </ul>
+            </div>
+        </section>
+
+    </main>
+
+    <nav id="bottom-nav" class="glass-panel">
+        <div class="nav-item active" onclick="switchView('home')">
+            <i class="fas fa-home"></i>
+            <span>Home</span>
+        </div>
+        <div class="nav-item" onclick="switchView('library')">
+            <i class="fas fa-book-open"></i>
+            <span>Library</span>
+        </div>
+        <div class="nav-item" onclick="switchView('player')">
+            <i class="fas fa-headphones"></i>
+            <span>Player</span>
+        </div>
+        <div class="nav-item" onclick="switchView('profile')">
+            <i class="fas fa-user"></i>
+            <span>Profile</span>
+        </div>
+    </nav>
+
+    <script src="script.js"></script>
+</body>
+</html>
