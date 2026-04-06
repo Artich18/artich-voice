@@ -192,6 +192,13 @@ function prevChapter() {
     currentAudio.src = chapters[currentChapter];
     currentAudio.play();
 }
+function shareStory() {
+    navigator.share({
+        title: "Artich Voice",
+        text: "Listen this emotional story",
+        url: window.location.href
+    });
+}
 
 /* ================= PLAYER EVENT LISTENERS ================= */
 function setupAudioListeners() {
