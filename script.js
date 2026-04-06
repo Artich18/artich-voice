@@ -113,6 +113,13 @@ function openPlayer(storyId = "default-story") {
 }
 
 /* ================= AUDIO PLAYER LOGIC ================= */
+function saveBookmark() {
+    const time = currentAudio.currentTime;
+    let bookmarks = JSON.parse(localStorage.getItem("bookmarks")) || [];
+    bookmarks.push(time);
+    localStorage.setItem("bookmarks", JSON.stringify(bookmarks));
+    alert("Bookmark saved");
+}
 function togglePlay() {
     const playIcon = document.getElementById('play-icon');
     
@@ -165,6 +172,7 @@ function setupAudioListeners() {
         const percent = (currentAudio.currentTime / currentAudio.duration) * 100;
         seekBar.value = isNaN(percent) ? 0 : percent;
         document.getElementById('current-time').innerText = formatTime(currentAudio.currentTime);
+      localStorage.setItem("default-story-time", currentAudio.currentTime);
         
         // TODO: Throttle and save to Firebase listeningProgress every 10 seconds
     });
