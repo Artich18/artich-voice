@@ -1,7 +1,7 @@
 /* =============================================
   ARTICH VOICE - CORE APP LOGIC
 =============================================
-  Integrations Placeholder for Firebase & Cloudinary
+  Integrations Placeholder for Firebase & Cloudinary 
 */
 
 const firebaseConfig = {
@@ -31,9 +31,8 @@ let libraryData = [];
 async function loadStories() {
     const res = await fetch("stories.json");
     libraryData = await res.json();
-    loadStories();
+    populateLibrary();
 }
-
 /* ================= INITIALIZATION ================= */
 document.addEventListener("DOMContentLoaded", () => {
     checkLoginStatus();
