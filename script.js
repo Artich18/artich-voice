@@ -161,6 +161,7 @@ function setSleepTimer() {
         }, time * 60000);
         
         alert(`Sleep timer set for ${time} minutes.`);
+      document.body.style.filter = "brightness(0.6)";
     }
 }
 function addFavorite(storyTitle = "The Scars We Hide") {
@@ -188,6 +189,10 @@ function setupAudioListeners() {
     currentAudio.addEventListener('loadedmetadata', () => {
         document.getElementById('total-time').innerText = formatTime(currentAudio.duration);
     });
+  currentAudio.addEventListener("ended", () => {
+    currentAudio.src = "audio/chapter2.mp3";
+    currentAudio.play();
+});
 
     seekBar.addEventListener('input', (e) => {
         const time = (e.target.value / 100) * currentAudio.duration;
